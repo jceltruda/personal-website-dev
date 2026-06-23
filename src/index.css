@@ -28,11 +28,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-}
 
 a {
   color: inherit;
