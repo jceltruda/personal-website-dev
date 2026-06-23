@@ -3,19 +3,22 @@ const projects = [
     id: 1,
     title: "Rehab Games",
     description: "Turns rehab exercises into fun retro games",
-    tags: ["JavaScript", "Django", "MediaPipe", "Gunicorn"]
+    tags: ["JavaScript", "Django", "MediaPipe", "Gunicorn"],
+    link: "https://rehab-games.onrender.com/"
   },
   {
     id: 2,
     title: "Lung Cancer Detection Using CNN",
     description: "CNN for lung cancer detection from CT scans",
-    tags: ["Python", "PyTorch"]
+    tags: ["Python", "PyTorch"],
+    link: "https://github.com/jceltruda/CNN-for-Lung-Cancer-Classification"
   },
   {
     id: 3,
     title: "FinGPT - Transformer Prediction",
     description: "Fine-tuning LLMs for stock market prediction",
-    tags: ["Python", "PyTorch", "Transformers"]
+    tags: ["Python", "PyTorch", "Transformers"],
+    link: "https://github.com/jceltruda/FinGPT-TransformerPrediction"
   }
 ];
 
@@ -27,7 +30,11 @@ export default function Projects() {
         {projects.map((project) => (
           <div key={project.id} className="project-card">
             <div className="project-header">
-              <span className="project-title">{project.title}</span>
+              {project.link ? (
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-title" style={{ color: 'inherit', textDecoration: 'none' }}>{project.title}</a>
+              ) : (
+                <span className="project-title">{project.title}</span>
+              )}
               <span className="project-status"></span>
             </div>
             <p className="project-desc">{project.description}</p>

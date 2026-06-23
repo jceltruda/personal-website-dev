@@ -1,6 +1,6 @@
 # Joseph Celtruda's Personal Website
 
-This is a personal portfolio website built with React and Vite. It showcases work experience, education, personal projects, and technical skills.
+This is a personal portfolio website built with React and Next.js. It showcases work experience, education, personal projects, and technical skills.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ To run this project locally:
    ```
 
 ## Technologies Used
+- Next.js App Router
 - React
-- Vite
 - Vanilla CSS
-- React Icons
+- Lucide React
