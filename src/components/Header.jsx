@@ -45,7 +45,7 @@ export default function Header() {
           engineering and applied AI, with internship experience in AI engineering, full-stack
           development, and scalable backend systems.
         </p>
-        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="link-button">
+        <a href="/resume" target="_blank" rel="noopener noreferrer" className="link-button">
           View my resume
         </a>
       </div>
