@@ -313,7 +313,7 @@ section[id] {
 .chat-bubble p:last-child { margin-bottom: 0; }
 .chat-bubble-user {
   align-self: flex-end;
-  background: var(--accent-color, #2563eb);
+  background: var(--brand-color, #1E5AA8);
   color: #fff;
 }
 .chat-bubble-assistant {
@@ -336,8 +336,9 @@ section[id] {
   padding: 0.7rem 1.1rem;
   border-radius: 0.6rem;
   border: none;
-  background: var(--accent-color, #2563eb);
+  background: var(--brand-color, #1E5AA8);
   color: #fff;
   cursor: pointer;
 }
+.chat-send:hover:not(:disabled) { background: #17467f; }
 .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
