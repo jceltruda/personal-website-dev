@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary-color: #111827;
-  --secondary-color: #4b5563;
-  --accent-color: #2563eb;
-  --bg-color: #ffffff;
-  --card-bg: #f9fafb;
-  --border-color: #e5e7eb;
-  --text-main: #1f2937;
-  --text-muted: #6b7280;
-  
+  --primary-color: #ffffff;   /* headings / emphasis — white */
+  --secondary-color: #a0a0a0; /* secondary body text — grey */
+  --accent-color: #38BDF8;    /* Accent — links, hover, active, name */
+  --brand-color: #1E5AA8;     /* Primary — filled brand elements */
+  --bg-color: #1a1a1a;        /* Page */
+  --card-bg: #242424;         /* Surface — slightly elevated */
+  --border-color: #333333;    /* derived dark border */
+  --text-main: #a0a0a0;       /* regular text — grey */
+  --text-muted: #909090;      /* dimmer muted text */
+
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
