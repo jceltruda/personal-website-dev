@@ -26,3 +26,12 @@ Single-page portfolio website using Next.js App Router with plain JavaScript (JS
 **Icons:** `lucide-react` for `Mail` and `Globe`; `react-icons` for GitHub (`FaGithub`) and LinkedIn (`FaLinkedin`) icons.
 
 **Static assets** live in `public/`: `headshot-cropped.jpg`, `resume.pdf`, and `logos/` (company/school logo images referenced in Experience and Education components).
+
+## Design Context
+
+This project is set up for the **impeccable** design skill. Two root files carry the design intent — read them before significant UI work:
+
+- **`PRODUCT.md`** (strategic): register, target users, product purpose, brand personality, anti-references, and design principles. Register is `brand` (a portfolio — design IS the product). Primary audience is recruiters/hiring managers; personality is "approachable, modern, technical."
+- **`DESIGN.md`** (visual): the design system in Stitch format — color tokens, typography, elevation, components, and Do's/Don'ts. Creative North Star: **"The Approachable Workshop."** The `.impeccable/design.json` sidecar holds tonal ramps, motion/shadow tokens, and component snippets.
+
+Run `/impeccable <command>` (e.g. `critique`, `polish`, `craft`, `live`) for design work; every command reads these two files first.

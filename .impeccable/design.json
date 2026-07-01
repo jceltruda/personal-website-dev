@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-25T00:00:00.000Z",
+  "title": "Design System: Joseph Celtruda — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "sky-accent":      { "role": "primary",  "displayName": "Sky Signal",        "canonical": "#38BDF8", "tonalRamp": ["#06283b", "#0a3a55", "#0f5378", "#1873a3", "#2596cf", "#38bdf8", "#74d2fb", "#aee5fd", "#d9f4fe"] },
+      "brand-blue":      { "role": "secondary","displayName": "Workshop Blue",      "canonical": "#1E5AA8", "tonalRamp": ["#0a1d36", "#102c52", "#163b6f", "#1c4a8b", "#1e5aa8", "#3f78c0", "#6e9bd4", "#a3c0e6", "#d3e1f4"] },
+      "brand-blue-deep": { "role": "secondary","displayName": "Workshop Blue Deep", "canonical": "#17467F", "tonalRamp": ["#081627", "#0d2342", "#12325d", "#173978", "#17467f", "#3768a0", "#6690c1", "#9db9dc", "#cfdef0"] },
+      "workshop-ink":    { "role": "neutral",  "displayName": "Workshop Ink",       "canonical": "#1A1A1A", "tonalRamp": ["#000000", "#0d0d0d", "#1a1a1a", "#2e2e2e", "#454545", "#6b6b6b", "#909090", "#bcbcbc", "#e8e8e8"] },
+      "workshop-surface":{ "role": "neutral",  "displayName": "Workshop Surface",   "canonical": "#242424", "tonalRamp": ["#0a0a0a", "#161616", "#242424", "#363636", "#4d4d4d", "#727272", "#9a9a9a", "#c2c2c2", "#ebebeb"] },
+      "hairline":        { "role": "neutral",  "displayName": "Hairline",           "canonical": "#333333", "tonalRamp": ["#0d0d0d", "#1a1a1a", "#262626", "#333333", "#4d4d4d", "#6b6b6b", "#909090", "#bcbcbc", "#e8e8e8"] },
+      "ink-white":       { "role": "neutral",  "displayName": "Ink White",          "canonical": "#FFFFFF", "tonalRamp": ["#cccccc", "#d9d9d9", "#e6e6e6", "#f0f0f0", "#f7f7f7", "#fbfbfb", "#fdfdfd", "#fefefe", "#ffffff"] },
+      "text-body":       { "role": "neutral",  "displayName": "Body Grey",          "canonical": "#A0A0A0", "tonalRamp": ["#2e2e2e", "#454545", "#5c5c5c", "#757575", "#8d8d8d", "#a0a0a0", "#bcbcbc", "#d6d6d6", "#efefef"] },
+      "text-muted":      { "role": "neutral",  "displayName": "Muted Grey",         "canonical": "#909090", "tonalRamp": ["#262626", "#3b3b3b", "#525252", "#6b6b6b", "#838383", "#909090", "#b0b0b0", "#d0d0d0", "#efefef"] },
+      "status-green":    { "role": "tertiary", "displayName": "Active Green",       "canonical": "#22C55E", "tonalRamp": ["#052e16", "#075226", "#0a7637", "#119548", "#16a34a", "#22c55e", "#5cd687", "#9ce7b4", "#d6f6e1"] },
+      "error-red":       { "role": "tertiary", "displayName": "Alert Red",          "canonical": "#EF4444", "tonalRamp": ["#450a0a", "#651414", "#871f1f", "#b91c1c", "#dc2626", "#ef4444", "#f87171", "#fca5a5", "#fee2e2"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "The header name only — largest, brightest moment, set in Sky Signal." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles with a hairline rule beneath." },
+      "title":    { "displayName": "Title",    "purpose": "Company names, project titles, card headers." },
+      "body":     { "displayName": "Body",     "purpose": "Running prose and descriptions, 65–75ch." },
+      "label":    { "displayName": "Label",    "purpose": "Monospace metadata: roles, dates, locations." }
+    },
+    "shadows": [
+      { "name": "lift-on-hover", "value": "0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025)", "purpose": "Project cards on hover, paired with translateY(-2px)." },
+      { "name": "grounding", "value": "0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06)", "purpose": "The headshot image only — the one at-rest shadow." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Strong ease-out for entrance and interaction; the built-in ease-out is too weak." },
+      { "name": "state-transition", "value": "0.2s ease", "purpose": "Default duration/easing for color and border state changes." },
+      { "name": "reveal", "value": "opacity 0.5s, transform 0.5s (translateY 24px → 0)", "purpose": "Scroll-into-view reveal; drops the translate under prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Skill Tag",
+      "kind": "chip",
+      "refersTo": "button-skill",
+      "description": "Solid brand-blue tag for a skill keyword; bolder than a badge because skills are a primary signal.",
+      "html": "<span class=\"ds-skill-tag\">TypeScript</span>",
+      "css": ".ds-skill-tag { display: inline-block; background: #1E5AA8; color: #fff; padding: 0.35rem 0.75rem; border-radius: 6px; font: 500 0.85rem Inter, system-ui, sans-serif; transition: background-color 0.2s ease; } .ds-skill-tag:hover { background: #17467F; }"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Quiet pill for non-interactive metadata; surface fill with a hairline border.",
+      "html": "<span class=\"ds-badge\">Open to work</span>",
+      "css": ".ds-badge { display: inline-block; background: #242424; color: #A0A0A0; border: 1px solid #333; padding: 0.25rem 0.75rem; border-radius: 9999px; font: 500 0.75rem Inter, system-ui, sans-serif; white-space: nowrap; }"
+    },
+    {
+      "name": "Link Button (ghost)",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Underlined ghost action that shifts to the accent on hover. Used for 'View my resume.'",
+      "html": "<a class=\"ds-link-button\" href=\"#\">View my resume</a>",
+      "css": ".ds-link-button { display: inline-flex; align-items: center; gap: 0.5rem; color: #A0A0A0; font: 400 0.875rem Inter, system-ui, sans-serif; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease; } .ds-link-button:hover, .ds-link-button:focus-visible { color: #38BDF8; outline: none; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "project-card",
+      "description": "Bordered card on the page bench; defined by its hairline border, flat at rest, lifts on hover.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-head\"><span class=\"ds-card-dot\"></span><h3 class=\"ds-card-title\">Recommender Engine</h3></div><p class=\"ds-card-desc\">Sequential recommendation experiments in PyTorch.</p></article>",
+      "css": ".ds-card { display: flex; flex-direction: column; padding: 1.25rem; border-radius: 12px; border: 1px solid #333; background: #1A1A1A; transition: transform 0.2s ease, box-shadow 0.2s ease; } .ds-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025); } .ds-card-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; } .ds-card-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; } .ds-card-title { margin: 0; font: 600 1.1rem Inter, system-ui, sans-serif; color: #fff; } .ds-card-desc { margin: 0; font: 400 0.875rem Inter, system-ui, sans-serif; color: #A0A0A0; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "chat-input",
+      "description": "Surface-filled field; focus shifts the border to the accent (no outline glow).",
+      "html": "<input class=\"ds-input\" placeholder=\"Ask a question…\" />",
+      "css": ".ds-input { width: 100%; padding: 0.7rem 0.9rem; border-radius: 0.6rem; border: 1px solid #333; background: #242424; color: #fff; font: 400 1rem Inter, system-ui, sans-serif; } .ds-input::placeholder { color: #909090; } .ds-input:focus { outline: none; border-color: #38BDF8; }"
+    },
+    {
+      "name": "Send Button",
+      "kind": "button",
+      "refersTo": "chat-send",
+      "description": "Filled brand-blue action; darkens on hover, fades when disabled.",
+      "html": "<button class=\"ds-send\">Send</button>",
+      "css": ".ds-send { padding: 0.7rem 1.1rem; border-radius: 0.6rem; border: none; background: #1E5AA8; color: #fff; font: 500 1rem Inter, system-ui, sans-serif; cursor: pointer; transition: background-color 0.2s ease; } .ds-send:hover:not(:disabled) { background: #17467F; } .ds-send:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Chat Bubbles",
+      "kind": "custom",
+      "refersTo": "chat-bubble-assistant",
+      "description": "The signature 'Ask about Joseph' assistant — user bubble fills brand-blue, assistant bubble sits on the lifted surface.",
+      "html": "<div class=\"ds-chat\"><div class=\"ds-bubble ds-bubble-user\">What did Joseph do at TE Connectivity?</div><div class=\"ds-bubble ds-bubble-assistant\">He worked on AI engineering and scalable backend systems.</div></div>",
+      "css": ".ds-chat { display: flex; flex-direction: column; gap: 0.75rem; } .ds-bubble { padding: 0.625rem 0.9rem; border-radius: 0.75rem; max-width: 85%; line-height: 1.5; font: 400 1rem Inter, system-ui, sans-serif; } .ds-bubble-user { align-self: flex-end; background: #1E5AA8; color: #fff; } .ds-bubble-assistant { align-self: flex-start; background: #242424; border: 1px solid #333; color: #E8E8E8; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "navbar-link",
+      "description": "Sticky-bar link; muted at rest, ink-white on hover, accent underline when active.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link-active\">About</a><a class=\"ds-nav-link\">Experience</a><a class=\"ds-nav-link\">Projects</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 0.25rem; background: rgba(26,26,26,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid #333; padding: 0 0.5rem; } .ds-nav-link { padding: 0.75rem 0.625rem; font: 500 0.875rem Inter, system-ui, sans-serif; color: #909090; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease; } .ds-nav-link:hover { color: #fff; } .ds-nav-link-active { color: #fff; border-bottom-color: #38BDF8; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Approachable Workshop",
+    "overview": "A dark, focused workspace that stays inviting rather than severe. The page is a near-black bench (#1A1A1A) where the work sits under good light; surfaces lift gently, corners are softened, and a single luminous sky-blue (#38BDF8) acts as the highlighter that marks what matters. It reads as a working developer's space — precise and engineered underneath, human and conversational on the surface, anchored by an AI assistant that lets a visitor simply ask about Joseph. The system is content-first and quiet, rejecting both the interchangeable developer-portfolio template and corporate-SaaS gloss. Warmth comes from rounded surfaces, soft press feedback, and the assistant's voice — never from noise or motion for its own sake.",
+    "keyCharacteristics": [
+      "Dark workshop canvas (#1A1A1A) with a slightly lifted surface (#242424).",
+      "One luminous signal accent (sky-blue #38BDF8); a deeper brand-blue (#1E5AA8) for filled, weighty elements.",
+      "Humanist sans (Inter) for substance, monospace for metadata labels only.",
+      "Flat by default; soft elevation appears as a response to hover/press, never at rest.",
+      "Comfortable single-column rhythm capped at an 800px reading width."
+    ],
+    "rules": [
+      { "name": "The One Highlighter Rule", "body": "Sky Signal (#38BDF8) is the only color allowed to attract on a given screen. If two things glow blue-bright and compete, one of them is wrong — demote it. The accent earns its meaning by being rare.", "section": "colors" },
+      { "name": "The Two-Blue Split", "body": "Bright blue points (signal); deep blue holds (fills). Never fill a large solid element with Sky Signal, and never use Workshop Blue for a hyperlink.", "section": "colors" },
+      { "name": "The Single-Voice Rule", "body": "Inter carries every non-label text role. Do not introduce a second display or body typeface; change weight or size, not family. The only sanctioned second voice is monospace, for metadata labels.", "section": "typography" },
+      { "name": "The Monospace-Is-Metadata Rule", "body": "Monospace never sets prose. It appears exclusively on short labeling tape — roles, dates, locations.", "section": "typography" },
+      { "name": "The Flat-At-Rest Rule", "body": "Surfaces are flat until touched. A shadow on a static, un-hovered element is a bug. Elevation is feedback, not decoration.", "section": "elevation" },
+      { "name": "The One Glass Rule", "body": "Backdrop-blur is permitted on exactly one surface — the sticky navbar — because it must remain readable over moving content. Glassmorphism anywhere else is forbidden.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep Sky Signal (#38BDF8) rare — reserve it for the name, links, active states, focus, and role labels.",
+      "Do split the blues by job: bright Sky Signal to point, deep Workshop Blue (#1E5AA8) to fill.",
+      "Do define cards by their 1px Hairline border on the #1A1A1A bench, not by a background-color change.",
+      "Do keep surfaces flat at rest; let shadow and translateY appear only on hover/press.",
+      "Do restrict monospace to short metadata labels (roles, dates, locations).",
+      "Do hold body prose to 65–75ch and the portfolio to its single 800px column.",
+      "Do ship a prefers-reduced-motion alternative for every motion."
+    ],
+    "donts": [
+      "Don't build the generic developer-portfolio template — no gradient hero, no skill-percentage bars, no endless identical-card grid.",
+      "Don't drift into corporate / SaaS gloss — no navy-and-gradient marketing, no hero-metric blocks, no stocky enterprise polish.",
+      "Don't go loud or over-animated — no neon glow, no gimmicky scroll effects, no motion competing with content.",
+      "Don't clutter — protect the single-column rhythm and the comfortable spacing.",
+      "Don't use gradient text (background-clip: text) or side-stripe accent borders (border-left > 1px) anywhere.",
+      "Don't use backdrop-blur outside the sticky navbar, or place a shadow on any element that isn't being hovered or pressed.",
+      "Don't introduce a second display/body typeface or fill a large element with Sky Signal."
+    ]
+  }
+}

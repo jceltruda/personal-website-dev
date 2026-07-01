@@ -4,3 +4,8 @@ status.md
 
 # local env
 .env*.local
+
+# Claude Code / skills tooling
+.agents/
+.claude/skills/
+skills-lock.json
