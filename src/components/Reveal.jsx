@@ -10,15 +10,14 @@ export default function Reveal({ children, className = '' }) {
     const node = ref.current;
     if (!node) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      // Reveal once, the first time the section scrolls into view, then stop
+      // observing so it never fades back out or re-animates on later scrolls.
+      if (entry.isIntersecting) {
+        setVisible(true);
+        observer.unobserve(entry.target);
+      }
+    });
 
     observer.observe(node);
     return () => observer.disconnect();
