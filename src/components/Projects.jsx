@@ -1,5 +1,13 @@
 const projects = [
   {
+    id: 4,
+    title: "RPIGPT",
+    description: "Course-grounded RAG chat platform serving 7,000+ students (requires RPI wifi)",
+    tags: ["Python", "React", "FastAPI", "ChromaDB", "PyTorch"],
+    link: "https://chat.rpai.club",
+    active: true
+  },
+  {
     id: 1,
     title: "Rehab Games",
     description: "Turns rehab exercises into fun retro games",
