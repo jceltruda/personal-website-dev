@@ -32,7 +32,7 @@ export default function Projects() {
           <div key={project.id} className="project-card">
             <div className="project-header">
               {project.link ? (
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-title" style={{ color: 'inherit', textDecoration: 'none' }}>{project.title}</a>
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-title">{project.title}</a>
               ) : (
                 <span className="project-title">{project.title}</span>
               )}

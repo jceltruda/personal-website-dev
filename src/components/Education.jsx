@@ -32,14 +32,14 @@ export default function Education() {
             <div className="experience-content">
               <div className="experience-header">
                 {edu.link ? (
-                  <a href={edu.link} target="_blank" rel="noopener noreferrer" className="experience-company" style={{ color: 'inherit', textDecoration: 'none' }}>{edu.school}</a>
+                  <a href={edu.link} target="_blank" rel="noopener noreferrer" className="experience-company">{edu.school}</a>
                 ) : (
                   <span className="experience-company">{edu.school}</span>
                 )}
                 <span className="experience-dates">{edu.date}</span>
               </div>
               <div className="experience-role">{edu.degree}</div>
-              <div className="experience-desc text-muted" style={{fontFamily: 'monospace', fontSize: '0.85rem'}}>
+              <div className="experience-desc experience-meta text-muted">
                 {edu.gpa}
               </div>
             </div>

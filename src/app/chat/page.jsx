@@ -5,15 +5,18 @@ import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { ArrowUp } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowUp, RotateCcw, Square } from 'lucide-react';
 import { getMessageText } from '../../lib/chat-validation.js';
 
 const SUGGESTIONS = [
-  'What did Joseph do at TE Connectivity?',
-  'What are his strongest skills?',
-  'Tell me about a project he built.',
-  'What did he study in school?',
+  { label: 'His time at TE Connectivity', prompt: 'What did Joseph do at TE Connectivity?' },
+  { label: 'Strongest skills', prompt: 'What are his strongest skills?' },
+  { label: 'A project he built', prompt: 'Tell me about a project he built.' },
+  { label: 'His research at RPI', prompt: 'What is Joseph researching at RPI?' },
 ];
+
+const PROMPTS = SUGGESTIONS.map((s) => s.prompt);
 
 // Types a suggestion out character by character, holds, deletes it, then
 // advances to the next — an animated "ghost" prompt living in the input's
@@ -52,10 +55,27 @@ function useTypewriter(words, active) {
   return { fragment: text, word: words[index % words.length] };
 }
 
+function AssistantAvatar() {
+  return (
+    <Image
+      src="/headshot-cropped.jpg"
+      alt=""
+      aria-hidden="true"
+      className="chat-avatar"
+      width={28}
+      height={28}
+    />
+  );
+}
+
 export default function ChatPage() {
   const [input, setInput] = useState('');
   const inputRef = useRef(null);
-  const { messages, sendMessage, status, error } = useChat({
+  const endRef = useRef(null);
+  // Whether the view should stay pinned to the newest message. Cleared when
+  // the user scrolls up to read history, restored when they return to the end.
+  const stickRef = useRef(true);
+  const { messages, sendMessage, status, error, stop, regenerate } = useChat({
     transport: new DefaultChatTransport({ api: '/api/chat' }),
   });
 
@@ -69,18 +89,48 @@ export default function ChatPage() {
   const thinking = status === 'submitted';
   const isEmpty = messages.length === 0;
 
+  useEffect(() => {
+    const onScroll = () => {
+      stickRef.current =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 120;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Follow the conversation as messages stream in, but never fight a user
+  // who has scrolled up to re-read something.
+  useEffect(() => {
+    if (!stickRef.current) return;
+    endRef.current?.scrollIntoView({ block: 'end' });
+  }, [messages, thinking]);
+
   // Only animate the ghost prompt on the empty landing screen while the field
   // is untouched.
-  const typing = useTypewriter(SUGGESTIONS, isEmpty && input === '');
+  const typing = useTypewriter(PROMPTS, isEmpty && input === '');
   // Ghost-typed suggestions only on the empty landing screen; once the
   // conversation starts, a plain follow-up prompt.
   const placeholder = isEmpty ? `${typing.fragment}▏` : 'Ask a follow-up…';
 
+  // Grow the composer with its content (up to ~4 lines), shrink when cleared.
+  // Depends on `placeholder` too: the ghost prompt renders in the content box,
+  // so on narrow screens the field must grow as the ghost wraps to a second
+  // line (scrollHeight includes wrapped placeholder text).
+  useEffect(() => {
+    const el = inputRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${Math.min(el.scrollHeight, 160)}px`;
+  }, [input, placeholder]);
+
   const submit = (text) => {
     const trimmed = text.trim();
     if (!trimmed || busy) return;
+    stickRef.current = true;
     sendMessage({ text: trimmed });
     setInput('');
+    inputRef.current?.focus();
   };
 
   const handleSubmit = (e) => {
@@ -99,6 +149,12 @@ export default function ChatPage() {
     if (e.key === 'Tab' && !e.shiftKey && input === '' && isEmpty && typing.word) {
       e.preventDefault();
       setInput(typing.word);
+      return;
+    }
+    // Enter sends; Shift+Enter inserts a newline.
+    if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+      e.preventDefault();
+      handleSubmit(e);
     }
   };
 
@@ -111,11 +167,15 @@ export default function ChatPage() {
           <h1 className="chat-hero-title">
             What do you want to know about Joseph?
           </h1>
+          <p className="chat-hero-sub">
+            An AI assistant grounded in his experience, projects, and research.
+          </p>
         </div>
       ) : (
-        <div className="chat-messages">
+        <div className="chat-messages" aria-live="polite">
           {messages.map((message) => (
             <div key={message.id} className={`chat-row chat-row-${message.role}`}>
+              {message.role === 'assistant' && <AssistantAvatar />}
               <div className={`chat-bubble chat-bubble-${message.role}`}>
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {getMessageText(message)}
@@ -125,6 +185,7 @@ export default function ChatPage() {
           ))}
           {thinking && (
             <div className="chat-row chat-row-assistant">
+              <AssistantAvatar />
               <div
                 className="chat-bubble chat-bubble-assistant chat-typing"
                 aria-label="Assistant is typing"
@@ -136,14 +197,28 @@ export default function ChatPage() {
             </div>
           )}
           {error && (
-            <div className="chat-error">Something went wrong. Please try again.</div>
+            <div className="chat-row chat-row-assistant">
+              <div className="chat-error-card" role="alert">
+                <span>Something went wrong.</span>
+                <button
+                  type="button"
+                  className="chat-retry"
+                  onClick={() => regenerate()}
+                >
+                  <RotateCcw size={13} aria-hidden="true" />
+                  Try again
+                </button>
+              </div>
+            </div>
           )}
+          <div ref={endRef} aria-hidden="true" />
         </div>
       )}
 
       <form className="chat-composer" onSubmit={handleSubmit}>
-        <input
+        <textarea
           ref={inputRef}
+          rows={1}
           className={`chat-input${isEmpty && input === '' ? ' chat-input--ghost' : ''}`}
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -152,20 +227,41 @@ export default function ChatPage() {
           maxLength={2000}
           aria-label="Your message"
         />
-        <button
-          className="chat-send"
-          type="submit"
-          disabled={busy || !input.trim()}
-          aria-label="Send message"
-        >
-          <ArrowUp size={18} strokeWidth={2.5} aria-hidden="true" />
-        </button>
+        {busy ? (
+          <button
+            type="button"
+            className="chat-send"
+            onClick={() => stop()}
+            aria-label="Stop generating"
+          >
+            <Square size={13} fill="currentColor" strokeWidth={0} aria-hidden="true" />
+          </button>
+        ) : (
+          <button
+            className="chat-send"
+            type="submit"
+            disabled={!input.trim() && !(isEmpty && typing.word)}
+            aria-label="Send message"
+          >
+            <ArrowUp size={18} strokeWidth={2.5} aria-hidden="true" />
+          </button>
+        )}
       </form>
 
-      {isEmpty && input === '' && (
-        <p className="chat-hint">
-          Press <kbd className="chat-kbd">Tab</kbd> to use the suggested prompt
-        </p>
+      {isEmpty && (
+        <div className="chat-suggestions">
+          {SUGGESTIONS.map((s, i) => (
+            <button
+              key={s.prompt}
+              type="button"
+              className="chat-chip"
+              style={{ animationDelay: `${0.2 + i * 0.07}s` }}
+              onClick={() => submit(s.prompt)}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
       )}
     </main>
   );

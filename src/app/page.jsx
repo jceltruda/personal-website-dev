@@ -14,6 +14,10 @@ export default function Page() {
         <Reveal offset={50} delay={0.15}><Education /></Reveal>
         <Reveal offset={50} delay={0.15}><Projects /></Reveal>
         <Reveal offset={50} delay={0.15}><Skills /></Reveal>
+        <footer className="site-footer">
+          <span>© 2026 Joseph Celtruda</span>
+          <span>Designed &amp; built by me</span>
+        </footer>
       </main>
     </>
   );

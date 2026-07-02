@@ -55,7 +55,7 @@ export default function Experience() {
               <div className="experience-header">
                 <div className="experience-title-group">
                   {exp.link ? (
-                    <a href={exp.link} target="_blank" rel="noopener noreferrer" className="experience-company" style={{ color: 'inherit', textDecoration: 'none' }}>{exp.company}</a>
+                    <a href={exp.link} target="_blank" rel="noopener noreferrer" className="experience-company">{exp.company}</a>
                   ) : (
                     <span className="experience-company">{exp.company}</span>
                   )}

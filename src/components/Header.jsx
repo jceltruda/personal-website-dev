@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { Mail, Globe } from 'lucide-react';
+import Link from 'next/link';
+import { Mail, Globe, Sparkles } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 export default function Header() {
@@ -40,14 +41,20 @@ export default function Header() {
       <div className="header-about">
         <h2>About</h2>
         <p>
-          I am a Computer Science student at <a href="https://www.rpi.edu/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>Rensselaer Polytechnic Institute</a>, researching
+          I am a Computer Science student at <a href="https://www.rpi.edu/" target="_blank" rel="noopener noreferrer" className="text-link">Rensselaer Polytechnic Institute</a>, researching
           sequential recommender systems and AI optimization. I am interested in software
           engineering and applied AI, with internship experience in AI engineering, full-stack
           development, and scalable backend systems.
         </p>
-        <a href="/resume" target="_blank" rel="noopener noreferrer" className="link-button">
-          View my resume
-        </a>
+        <div className="header-actions">
+          <a href="/resume" target="_blank" rel="noopener noreferrer" className="link-button">
+            View my resume
+          </a>
+          <Link href="/chat" className="link-button link-button-accent">
+            <Sparkles size={14} aria-hidden="true" />
+            Ask my AI assistant
+          </Link>
+        </div>
       </div>
     </section>
   );
