@@ -15,20 +15,6 @@ const SUGGESTIONS = [
   'What did he study in school?',
 ];
 
-const STATIC_PLACEHOLDER = 'Ask anything about Joseph…';
-
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduced(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-  return reduced;
-}
-
 // Types a suggestion out character by character, holds, deletes it, then
 // advances to the next — an animated "ghost" prompt living in the input's
 // placeholder. Returns the current fragment and the full word it's targeting
@@ -68,7 +54,6 @@ function useTypewriter(words, active) {
 
 export default function ChatPage() {
   const [input, setInput] = useState('');
-  const reduceMotion = usePrefersReducedMotion();
   const { messages, sendMessage, status, error } = useChat({
     transport: new DefaultChatTransport({ api: '/api/chat' }),
   });
@@ -78,18 +63,11 @@ export default function ChatPage() {
   const isEmpty = messages.length === 0;
 
   // Only animate the ghost prompt on the empty landing screen while the field
-  // is untouched (and motion is allowed).
-  const typing = useTypewriter(
-    SUGGESTIONS,
-    isEmpty && input === '' && !reduceMotion
-  );
+  // is untouched.
+  const typing = useTypewriter(SUGGESTIONS, isEmpty && input === '');
   // Ghost-typed suggestions only on the empty landing screen; once the
   // conversation starts, a plain follow-up prompt.
-  const placeholder = !isEmpty
-    ? 'Ask a follow-up…'
-    : reduceMotion
-      ? STATIC_PLACEHOLDER
-      : `${typing.fragment}▏`;
+  const placeholder = isEmpty ? `${typing.fragment}▏` : 'Ask a follow-up…';
 
   const submit = (text) => {
     const trimmed = text.trim();
