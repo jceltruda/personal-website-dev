@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import ReactMarkdown from 'react-markdown';
@@ -54,9 +54,16 @@ function useTypewriter(words, active) {
 
 export default function ChatPage() {
   const [input, setInput] = useState('');
+  const inputRef = useRef(null);
   const { messages, sendMessage, status, error } = useChat({
     transport: new DefaultChatTransport({ api: '/api/chat' }),
   });
+
+  // Focus the composer on load so Tab immediately accepts the ghost suggestion
+  // rather than walking through the nav links first.
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const busy = status === 'submitted' || status === 'streaming';
   const thinking = status === 'submitted';
@@ -136,7 +143,8 @@ export default function ChatPage() {
 
       <form className="chat-composer" onSubmit={handleSubmit}>
         <input
-          className="chat-input"
+          ref={inputRef}
+          className={`chat-input${isEmpty && input === '' ? ' chat-input--ghost' : ''}`}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}

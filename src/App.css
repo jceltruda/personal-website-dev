@@ -473,6 +473,10 @@ body:has(.chat-page:not(.chat-page--active)) {
 }
 .chat-input:focus { outline: none; }
 .chat-input::placeholder { color: var(--text-muted, #909090); opacity: 1; }
+/* While the ghost typewriter is showing, hide the native caret so it doesn't
+   sit alongside the fake "▏". The real caret returns as soon as the user
+   types, since the placeholder (and its cursor) disappears then. */
+.chat-input--ghost { caret-color: transparent; }
 
 /* Subtle hint that the ghost-typed prompt can be accepted with Tab. Only shown
    on the empty landing while the field is untouched. */
