@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, Globe, Sparkles } from 'lucide-react';
+import { Mail, Globe } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 export default function Header() {
@@ -51,7 +51,6 @@ export default function Header() {
             View my resume
           </a>
           <Link href="/chat" className="link-button link-button-accent">
-            <Sparkles size={14} aria-hidden="true" />
             Ask my AI assistant
           </Link>
         </div>

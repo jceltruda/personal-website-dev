@@ -38,15 +38,6 @@
   border-bottom-color: var(--accent-color);
 }
 
-/* The Chat link is an action, not a section — split it off to the right edge
-   with a small spark so it reads as the site's feature. */
-.navbar-link-chat {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
 section[id] {
   scroll-margin-top: 3rem;
 }
@@ -648,7 +639,10 @@ body:has(.chat-page:not(.chat-page--active)) {
   line-height: 1.5;
   resize: none;
   max-height: 160px;
-  overflow-y: auto;
+  /* Hidden by default so a wrapped ghost placeholder never shows a scrollbar;
+     the auto-grow effect flips this to `auto` only once real content exceeds
+     the max height. */
+  overflow-y: hidden;
   scrollbar-width: thin;
 }
 .chat-input:focus { outline: none; }

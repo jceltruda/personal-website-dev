@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sparkles } from 'lucide-react';
 
 const navItems = [
   { id: 'about', label: 'About' },
@@ -89,9 +88,8 @@ export default function NavBar() {
         ))}
         <Link
           href="/chat"
-          className={`navbar-link navbar-link-chat${pathname === '/chat' ? ' navbar-link-active' : ''}`}
+          className={`navbar-link${pathname === '/chat' ? ' navbar-link-active' : ''}`}
         >
-          <Sparkles size={13} aria-hidden="true" />
           Chat
         </Link>
       </div>

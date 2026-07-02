@@ -121,7 +121,11 @@ export default function ChatPage() {
     const el = inputRef.current;
     if (!el) return;
     el.style.height = 'auto';
+    const capped = el.scrollHeight > 160;
     el.style.height = `${Math.min(el.scrollHeight, 160)}px`;
+    // Only allow scrolling once real content exceeds the cap, so a wrapped
+    // ghost placeholder never surfaces a scrollbar.
+    el.style.overflowY = capped ? 'auto' : 'hidden';
   }, [input, placeholder]);
 
   const submit = (text) => {
