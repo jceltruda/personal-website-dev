@@ -16,7 +16,6 @@ export default function Page() {
         <Reveal offset={50} delay={0.15}><Skills /></Reveal>
         <footer className="site-footer">
           <span>© 2026 Joseph Celtruda</span>
-          <span>Designed &amp; built by Joe</span>
         </footer>
       </main>
     </>
